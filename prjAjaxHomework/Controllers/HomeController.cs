@@ -17,7 +17,10 @@ namespace prjAjaxHomework.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult ShowTravel()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

@@ -24,7 +24,9 @@
     <script>
         let str = "";
         for (let i = 0; i < DATAS.length; i++) {
-            str += `<tr><td>${DATAS[i].Name}</td><td>${DATAS[i].Add}</td><td>${DATAS[i].Tel}</td></tr >`;
+            str += `<tr><td>${DATAS[i].Name}</td>`;
+            str += `<td>${DATAS[i].Add}</td>`;
+            str += `<td>${DATAS[i].Tel}</td></tr>`;
         }
         $("tbody").html(str);
     </script>

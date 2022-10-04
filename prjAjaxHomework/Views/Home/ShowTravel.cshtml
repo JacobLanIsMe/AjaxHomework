@@ -22,12 +22,20 @@
 @section Scripts{ 
     <script src="~/js/travel.js"></script>
     <script>
-        let str = "";
-        for (let i = 0; i < DATAS.length; i++) {
-            str += `<tr><td>${DATAS[i].Name}</td>`;
-            str += `<td>${DATAS[i].Add}</td>`;
-            str += `<td>${DATAS[i].Tel}</td></tr>`;
-        }
-        $("tbody").html(str);
+        //let str = "";
+        //for (let i = 0; i < DATAS.length; i++) {
+        //    str += `<tr><td>${DATAS[i].Name}</td>`;
+        //    str += `<td>${DATAS[i].Add}</td>`;
+        //    str += `<td>${DATAS[i].Tel}</td></tr>`;
+        //}
+        let newDATAS = DATAS.map(data => {
+            let a = "";
+            a += `<tr><td>${data.Name}</td>`;
+            a += `<td>${data.Add}</td>`;
+            a += `<td>${data.Tel}</td></tr>`;
+            return a;
+        });
+        newDATAS.join("")
+        $("tbody").html(newDATAS);
     </script>
 }

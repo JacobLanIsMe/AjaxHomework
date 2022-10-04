@@ -20,11 +20,7 @@ namespace prjAjaxHomework.Controllers
         public IActionResult CheckName(string name)
         {
             string str = "";
-            if (name == "")
-            {
-                str = "名字不能空白";
-            }
-            else
+            if (name != null)
             {
                 DemoContext dbContext = new DemoContext();
                 var member = dbContext.Members.Where(i => i.Name == name).Select(i => i).FirstOrDefault();
@@ -37,6 +33,8 @@ namespace prjAjaxHomework.Controllers
                     str = "帳號可使用";
                 }
             }
+            
+            
             return Content(str);
         }
     }

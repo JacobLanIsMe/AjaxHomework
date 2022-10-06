@@ -23,7 +23,6 @@
                 city.options.add(opt);
             });
         }
-        
         LoadCity();
         city.addEventListener("change", async function () {
             const selectedCity = city.value;
@@ -43,7 +42,7 @@
             data.forEach(i => {
                 str += `<option value="${i}">${i}</option>`;
             });
-            road.innerText = str;
+            road.innerHTML = str;
         });
 
     </script>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "AutoComplete";
+}
+
+<h1>AutoComplete</h1>
+
+<div class="m-auto w-50">
+    <input type="text" id="inputText" class="w-100" />
+    <div class="list-group mt-1 d-none">
+        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+            The current button
+        </button>
+    </div>
+</div>
+    
+@section Scripts{ 
+<script>
+    const inputText = document.getElementById("inputText");
+    const btnList = document.querySelector(".list-group");
+
+    inputText.addEventListener("input", async function () {
+        const keyword = inputText.value;
+        let response = await fetch("@Url.Content("~/api/AutoComplete")" + `?keyword=${keyword}`);
+        let data = await response.json();
+        
+        let str = "";
+        data.forEach(i => {
+            str += `<button type="button" class="list-group-item list-group-item-action" aria-current="true" onclick="SelectKeyword(event)">${i}</button >`;
+        });
+        btnList.innerHTML = str;
+        btnList.classList.remove("d-none");
+    });
+
+    function SelectKeyword(event) {
+        inputText.value = event.target.innerHTML;
+        btnList.classList.add("d-none");
+    }
+</script>
+
+}

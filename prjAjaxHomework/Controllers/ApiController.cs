@@ -9,6 +9,8 @@ namespace prjAjaxHomework.Controllers
 {
     public class ApiController : Controller
     {
+        
+
         public IActionResult Index()
         {
             return View();
@@ -36,6 +38,33 @@ namespace prjAjaxHomework.Controllers
             
             
             return Content(str);
+        }
+
+        public IActionResult City()
+        {
+            DemoContext dbContext = new DemoContext();
+            var cities = dbContext.Addresses.Select(i => i.City).Distinct();
+            return Json(cities);
+        }
+        public IActionResult Site(string city)
+        {
+            DemoContext dbContext = new DemoContext();
+            var sites = dbContext.Addresses.Where(i => i.City == city).Select(i => i.SiteId).Distinct();
+            return Json(sites);
+        }
+        public IActionResult Road(string site)
+        {
+            DemoContext dbContext = new DemoContext();
+            var roads = dbContext.Addresses.Where(i => i.SiteId == site).Select(i => i.Road).Distinct();
+            return Json(roads);
+        }
+
+
+        public IActionResult AutoComplete(string keyword)
+        {
+            NorthwindContext dbContext = new NorthwindContext();
+            var products = dbContext.Products.Where(i => i.ProductName.Contains(keyword)).Select(i => i.ProductName);
+            return Json(products);
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+
+<select id="city"></select>
+<select id="site"></select>
+<select id="road"></select>
+
+
+@section Scripts{ 
+    <script>
+        const city = document.getElementById("city");
+        const site = document.getElementById("site");
+        const road = document.getElementById("road");
+        async function LoadCity() {
+            const response = await fetch("@Url.Content("~/Api/City")");
+            const cities = await response.json();
+            cities.forEach(i => {
+                let opt = new Option(i, i);
+                city.options.add(opt);
+            });
+        }
+        
+        LoadCity();
+        city.addEventListener("change", async function () {
+            const selectedCity = city.value;
+            const response = await fetch("@Url.Content("~/api/site")" + `?city=${selectedCity}`);
+            const data = await response.json();
+            data.forEach(i => {
+                let opt = new Option(i, i);
+                site.options.add(opt);
+            });
+        });
+
+        site.addEventListener("change", async function () {
+            const selectedSite = site.value;
+            const response = await fetch("@Url.Content("~/api/road")" + `?site=${selectedSite}`);
+            const data = await response.json();
+            let str = "";
+            data.forEach(i => {
+                str += `<option value="${i}">${i}</option>`;
+            });
+            road.innerText = str;
+        });
+
+    </script>
+}
